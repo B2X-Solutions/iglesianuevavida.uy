@@ -77,7 +77,7 @@ const translations = {
         'conference-room': 'Conference Room',
         'leadership-meeting-description': 'Monthly meeting for church leaders to plan and coordinate activities.',
         'about-us': 'About Us',
-        'about-description': 'We are a welcoming community dedicated to spreading God\'s love and message.',
+        'about-description': 'We are a welcoming community dedicated to spreading God\'s message about love and justice.',
         'contact': 'Contact',
         'address': 'Francisco Joaquín Muñoz 3376, 11300 Montevideo, Departamento de Montevideo',
         'phone': '26227763',
@@ -168,7 +168,7 @@ const translations = {
         'conference-room': 'Sala de Conferência',
         'leadership-meeting-description': 'Reunião mensal para líderes da igreja planejarem e coordenarem atividades.',
         'about-us': 'Sobre Nós',
-        'about-description': 'Somos uma comunidade acolhedora dedicada a espalhar o amor e a mensagem de Deus.',
+        'about-description': 'Somos uma comunidade acolhedora dedicada a espalhar a mensagem de Deus sobre o amor e a justiça.',
         'contact': 'Contato',
         'address': 'Francisco Joaquín Muñoz 3376, 11300 Montevideo, Departamento de Montevideo',
         'phone': '26227763',
@@ -259,7 +259,7 @@ const translations = {
         'conference-room': 'Sala de Conferencias',
         'leadership-meeting-description': 'Reunión mensual para que los líderes de la iglesia planifiquen y coordinen actividades.',
         'about-us': 'Sobre Nosotros',
-        'about-description': 'Somos una comunidad acogedora dedicada a difundir el amor y el mensaje de Dios.',
+        'about-description': 'Somos una comunidad acogedora dedicada a difundir el mensaje de Dios sobre el amor y la justicia.',
         'contact': 'Contacto',
         'address': 'Francisco Joaquín Muñoz 3376, 11300 Montevideo, Departamento de Montevideo',
         'phone': '26227763',
@@ -530,4 +530,57 @@ document.addEventListener('DOMContentLoaded', function() {
     // Carregar conteúdo inicial
     loadPageContent(window.location.pathname);
     updateActiveLinks();
+});
+
+// Função para controlar o menu móvel
+function setupMobileMenu() {
+    const mobileMenuButton = document.querySelector('.mobile-menu-button');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileMenuButton && navLinks) {
+        mobileMenuButton.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+
+        // Fechar o menu quando clicar em um link
+        const links = navLinks.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    }
+}
+
+// Inicializar o menu móvel quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', function() {
+    setupMobileMenu();
+    
+    // Inicializar estado ativo dos links
+    updateActiveLinks();
+
+    // Carregar conteúdo inicial
+    loadPageContent(window.location.pathname);
+    updateActiveLinks();
+});
+
+// Controle do menu móvel
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuButton = document.querySelector('.mobile-menu-button');
+    const navLinks = document.querySelector('.nav-links');
+
+    mobileMenuButton.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        const isOpen = navLinks.classList.contains('active');
+        mobileMenuButton.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Fechar menu ao clicar em um link
+    const navItems = document.querySelectorAll('.nav-links a');
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            mobileMenuButton.setAttribute('aria-expanded', 'false');
+        });
+    });
 }); 
