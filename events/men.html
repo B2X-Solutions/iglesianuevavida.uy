@@ -16,11 +16,24 @@
                 </a>
             </div>
             <div class="language-selector">
-                <select id="languageSelect">
-                    <option value="en">English</option>
-                    <option value="pt">Português</option>
-                    <option value="es">Español</option>
-                </select>
+                <button class="language-button">
+                    <i class="fas fa-globe"></i>
+                    <span class="current-language">🇺🇸</span>
+                </button>
+                <div class="language-dropdown">
+                    <div class="language-option" data-lang="es" data-flag="🇺🇾">
+                        <span class="flag">🇺🇾</span>
+                        <span class="language-name">Español</span>
+                    </div>
+                    <div class="language-option" data-lang="pt" data-flag="🇧🇷">
+                        <span class="flag">🇧🇷</span>
+                        <span class="language-name">Português</span>
+                    </div>
+                    <div class="language-option" data-lang="en" data-flag="🇺🇸">
+                        <span class="flag">🇺🇸</span>
+                        <span class="language-name">English</span>
+                    </div>
+                </div>
             </div>
             <ul class="nav-links">
                 <li><a href="../activities.html">Activities</a></li>

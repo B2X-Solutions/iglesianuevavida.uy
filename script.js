@@ -277,14 +277,7 @@ const translations = {
 
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar o seletor de idioma
-    const languageButton = document.querySelector('.language-button');
-    const languageDropdown = document.querySelector('.language-dropdown');
-    const languageOptions = document.querySelectorAll('.language-option');
-    const currentLanguageSpan = document.querySelector('.current-language');
-    
-    // Carregar idioma salvo ou usar o padrão (espanhol)
-    const savedLanguage = localStorage.getItem('language') || 'es';
-    updateLanguage(savedLanguage);
+    initLanguageSelector();
     
     // Menu mobile toggle
     const mobileMenuButton = document.querySelector('.mobile-menu-button');
@@ -403,23 +396,37 @@ document.addEventListener('DOMContentLoaded', function() {
         updateActiveLinks();
     });
     
-    // Toggle do dropdown de idioma
-    if (languageButton && languageDropdown) {
-        languageButton.addEventListener('click', function(e) {
-            e.stopPropagation();
-            languageDropdown.classList.toggle('active');
-        });
-        
-        // Fechar dropdown ao clicar fora
-        document.addEventListener('click', function() {
-            languageDropdown.classList.remove('active');
-        });
-        
-        // Prevenir que o clique no dropdown feche o dropdown
-        languageDropdown.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
+    // Inicializar estado ativo dos links
+    updateActiveLinks();
+
+    // Carregar conteúdo inicial
+    loadPageContent(window.location.pathname);
+    updateActiveLinks();
+});
+
+// Função para inicializar o seletor de idioma
+function initLanguageSelector() {
+    const languageButton = document.querySelector('.language-button');
+    const languageDropdown = document.querySelector('.language-dropdown');
+    const languageOptions = document.querySelectorAll('.language-option');
+    const currentLanguageSpan = document.querySelector('.current-language');
+    
+    if (!languageButton || !languageDropdown || !languageOptions.length || !currentLanguageSpan) {
+        return;
     }
+    
+    // Toggle do dropdown de idioma
+    languageButton.addEventListener('click', function(e) {
+        e.stopPropagation();
+        languageDropdown.classList.toggle('active');
+    });
+    
+    // Fechar dropdown ao clicar fora
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.language-selector')) {
+            languageDropdown.classList.remove('active');
+        }
+    });
     
     // Seleção de idioma
     languageOptions.forEach(option => {
@@ -432,155 +439,76 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Função para atualizar links ativos
-    function updateActiveLinks() {
-        const currentPath = window.location.pathname;
-        navigationLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            const isActive = currentPath.includes(href);
-            link.classList.toggle('active', isActive);
-            
-            // Se estiver em una subpágina de eventos, marcar o link de eventos como ativo
-            if (currentPath.includes('/events/') && href === 'events.html') {
-                link.classList.add('active');
-            }
-        });
-    }
+    // Carregar idioma salvo
+    const savedLanguage = localStorage.getItem('language') || 'es';
+    const flags = {
+        'es': '🇺🇾',
+        'pt': '🇧🇷',
+        'en': '🇺🇸'
+    };
+    currentLanguageSpan.textContent = flags[savedLanguage] || savedLanguage.toUpperCase();
     
-    // Função para carregar conteúdo da página
-    function loadPageContent(url) {
-        const contentContainer = document.getElementById('content-container');
-        
-        if (!contentContainer) return;
-        
-        // Determinar qual componente carregar com base na URL
-        let componentPath = 'components/home-content.html';
-        
-        if (url.includes('activities.html')) {
-            componentPath = 'components/activities-content.html';
-        } else if (url.includes('events.html')) {
-            componentPath = 'components/events-content.html';
-        } else if (url.includes('meetings.html')) {
-            componentPath = 'components/meetings-content.html';
-        } else if (url.includes('/events/')) {
-            // Para subpáginas de eventos, carregar o conteúdo específico
-            const eventType = url.split('/').pop().replace('.html', '');
-            componentPath = `components/events/${eventType}-content.html`;
-        }
-        
-        // Carregar o componente
-        fetch(componentPath)
-            .then(response => response.text())
-            .then(data => {
-                contentContainer.innerHTML = data;
-                updatePageLanguage();
-            })
-            .catch(error => {
-                console.error('Erro ao carregar o conteúdo:', error);
-            });
-    }
-    
-    // Função para atualizar o idioma da página
-    function updatePageLanguage() {
-        const elements = document.querySelectorAll('[data-translate]');
-        const currentLang = localStorage.getItem('language') || 'es';
-        
-        elements.forEach(element => {
-            const key = element.getAttribute('data-translate');
-            if (translations[currentLang] && translations[currentLang][key]) {
-                if (element.tagName === 'INPUT' && element.getAttribute('type') === 'placeholder') {
-                    element.placeholder = translations[currentLang][key];
-                } else {
-                    element.textContent = translations[currentLang][key];
-                }
-            }
-        });
-    }
-    
-    // Função para atualizar o idioma
-    function updateLanguage(lang, flag = null) {
-        localStorage.setItem('language', lang);
-        
-        // Atualizar o texto do botão de idioma
-        if (currentLanguageSpan) {
-            const languageNames = {
-                'es': 'Español',
-                'pt': 'Português',
-                'en': 'English'
-            };
-            currentLanguageSpan.textContent = languageNames[lang] || lang.toUpperCase();
-        }
-        
-        // Atualizar o idioma do documento
-        document.documentElement.lang = lang;
-        
-        // Atualizar o título da página
-        const titleElement = document.querySelector('title');
-        if (titleElement && translations[lang] && translations[lang]['church-name']) {
-            titleElement.textContent = translations[lang]['church-name'];
-        }
-        
-        // Atualizar todos os elementos traduzíveis
-        updatePageLanguage();
-    }
-    
-    // Inicializar estado ativo dos links
-    updateActiveLinks();
-
-    // Carregar conteúdo inicial
-    loadPageContent(window.location.pathname);
-    updateActiveLinks();
-});
-
-// Função para controlar o menu móvel
-function setupMobileMenu() {
-    const mobileMenuButton = document.querySelector('.mobile-menu-button');
-    const navLinks = document.querySelector('.nav-links');
-
-    if (mobileMenuButton && navLinks) {
-        mobileMenuButton.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-        });
-
-        // Fechar o menu quando clicar em um link
-        const links = navLinks.querySelectorAll('a');
-        links.forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
-    }
+    // Atualizar o idioma inicial da página
+    updateLanguage(savedLanguage);
 }
 
-// Inicializar o menu móvel quando o DOM estiver carregado
-document.addEventListener('DOMContentLoaded', function() {
-    setupMobileMenu();
+// Função para atualizar o idioma
+function updateLanguage(lang, flag = null) {
+    localStorage.setItem('language', lang);
     
-    // Inicializar estado ativo dos links
-    updateActiveLinks();
-
-    // Carregar conteúdo inicial
-    loadPageContent(window.location.pathname);
-    updateActiveLinks();
-});
+    // Atualizar o texto do botão de idioma
+    const currentLanguageSpan = document.querySelector('.current-language');
+    if (currentLanguageSpan) {
+        const flags = {
+            'es': '🇺🇾',
+            'pt': '🇧🇷',
+            'en': '🇺🇸'
+        };
+        currentLanguageSpan.textContent = flag || flags[lang] || lang.toUpperCase();
+    }
+    
+    // Atualizar o idioma do documento
+    document.documentElement.lang = lang;
+    
+    // Atualizar o título da página
+    const titleElement = document.querySelector('title');
+    if (titleElement && translations[lang] && translations[lang]['church-name']) {
+        titleElement.textContent = translations[lang]['church-name'];
+    }
+    
+    // Atualizar todos os elementos traduzíveis
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[lang] && translations[lang][key]) {
+            if (element.tagName.toLowerCase() === 'input' && element.type === 'submit') {
+                element.value = translations[lang][key];
+            } else {
+                element.textContent = translations[lang][key];
+            }
+        }
+    });
+}
 
 // Controle do menu móvel
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuButton = document.querySelector('.mobile-menu-button');
     const navLinks = document.querySelector('.nav-links');
 
-    mobileMenuButton.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
-        const isOpen = navLinks.classList.contains('active');
-        mobileMenuButton.setAttribute('aria-expanded', isOpen);
-    });
-
-    // Fechar menu ao clicar em um link
-    const navItems = document.querySelectorAll('.nav-links a');
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            mobileMenuButton.setAttribute('aria-expanded', 'false');
+    if (mobileMenuButton && navLinks) {
+        mobileMenuButton.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            const isOpen = navLinks.classList.contains('active');
+            mobileMenuButton.setAttribute('aria-expanded', isOpen);
         });
-    });
-}); 
+
+        // Fechar menu ao clicar em um link
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+});
