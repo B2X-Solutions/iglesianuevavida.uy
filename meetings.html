@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="meetings">Reuniones</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div id="header-container"></div>
+    
+    <main class="content-container">
+        <div id="content-container"></div>
+    </main>
+    
+    <div id="footer-container"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            async function loadComponent(url, containerId) {
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.text();
+                    document.getElementById(containerId).innerHTML = data;
+                } catch (error) {
+                    console.error(`Erro ao carregar ${url}:`, error);
+                    document.getElementById(containerId).innerHTML = `<div class="error-message">Erro ao carregar o componente. Por favor, tente novamente.</div>`;
+                }
+            }
+
+            // Carregar componentes
+            loadComponent('components/header.html', 'header-container');
+            loadComponent('components/meetings-content.html', 'content-container');
+            loadComponent('components/footer.html', 'footer-container');
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html> 
