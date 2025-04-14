@@ -61,13 +61,22 @@ img {
   color: var(--light-text);
   border-radius: var(--border-radius);
   text-align: center;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btn:hover {
   background-color: var(--secondary-color);
+  color: var(--light-text);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Header */
