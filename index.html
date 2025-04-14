@@ -4,93 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-translate="church-name">Iglesia Nueva Vida</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <div id="header-container"></div>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html"><img src="images/logo.jpeg" alt="Igreja Nueva Vida Logo"></a>
+                </div>
+                <div class="mobile-menu-button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <nav class="main-navigation">
+                    <ul class="nav-links">
+                        <li><a href="index.html" data-translate="home">Início</a></li>
+                        <li><a href="activities.html" data-translate="activities">Actividades</a></li>
+                        <li><a href="events.html" data-translate="events">Eventos</a></li>
+                        <li><a href="meetings.html" data-translate="meetings">Reuniones</a></li>
+                    </ul>
+                </nav>
+                <div class="language-selector">
+                    <button class="language-button">
+                        <i class="fas fa-globe"></i>
+                        <span class="current-language">🇺🇾</span>
+                    </button>
+                    <div class="language-dropdown">
+                        <div class="language-option" data-lang="en" data-flag="🇺🇸">
+                            <span class="flag">🇺🇸</span>
+                            <span class="language-name">English</span>
+                        </div>
+                        <div class="language-option" data-lang="es" data-flag="🇺🇾">
+                            <span class="flag">🇺🇾</span>
+                            <span class="language-name">Español</span>
+                        </div>
+                        <div class="language-option" data-lang="pt" data-flag="🇧🇷">
+                            <span class="flag">🇧🇷</span>
+                            <span class="language-name">Português</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
     
     <main class="content-container">
-        <div id="content-container"></div>
+        <!-- Conteúdo da página inicial -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 data-translate="welcome">Bienvenido a la Iglesia Nueva Vida</h1>
+                </div>
+            </div>
+        </section>
+
+        <section class="activities-section">
+            <div class="container">
+                <h2 data-translate="our-activities">Nuestras Actividades</h2>
+                <div class="activities-grid">
+                    <!-- Atividades da igreja -->
+                    <div class="activity-card">
+                        <div class="card-icon"><i class="fas fa-praying-hands"></i></div>
+                        <h3 data-translate="prayer-group">Grupo de Oración</h3>
+                        <p data-translate="prayer-group-description">Únase a nuestro grupo de oración para elevar sus necesidades e interceder por otros.</p>
+                    </div>
+                    <div class="activity-card">
+                        <div class="card-icon"><i class="fas fa-music"></i></div>
+                        <h3 data-translate="music-ministry">Ministerio de Música</h3>
+                        <p data-translate="music-ministry-description">Use sus talentos musicales para glorificar a Dios en nuestros servicios de adoración.</p>
+                    </div>
+                    <div class="activity-card">
+                        <div class="card-icon"><i class="fas fa-users"></i></div>
+                        <h3 data-translate="youth-activities">Actividades Juveniles</h3>
+                        <p data-translate="youth-description">Únase a nuestro grupo de jóvenes para actividades divertidas y crecimiento espiritual.</p>
+                    </div>
+                </div>
+                <div class="actions">
+                    <a href="activities.html" class="btn" data-translate="learn-more">Saber más</a>
+                </div>
+            </div>
+        </section>
     </main>
-    
-    <div id="footer-container"></div>
 
-    <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', async function() {
-            async function loadComponent(url, containerId) {
-                try {
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    const data = await response.text();
-                    document.getElementById(containerId).innerHTML = data;
-                } catch (error) {
-                    console.error(`Erro ao carregar ${url}:`, error);
-                    document.getElementById(containerId).innerHTML = `<div class="error-message">Erro ao carregar o componente. Por favor, tente novamente.</div>`;
-                }
-            }
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-translate="about-us">Sobre Nosotros</h3>
+                <p data-translate="about-description">Somos una comunidad acogedora dedicada a difundir el amor y el mensaje de Dios.</p>
+            </div>
+            <div class="footer-section">
+                <h3 data-translate="contact">Contacto</h3>
+                <p><a href="https://maps.app.goo.gl/EaC6JZ3v5mSWENKY9" target="_blank"><i class="fas fa-map-marker-alt"></i> <span data-translate="address">Francisco Joaquín Muñoz 3376, 11300 Montevideo</span></a></p>
+                <p><a href="tel:26227763"><i class="fas fa-phone"></i> <span data-translate="phone">26227763</span></a></p>
+                <p><a href="mailto:iebnuevid@gmail.com"><i class="fas fa-envelope"></i> <span data-translate="email">iebnuevid@gmail.com</span></a></p>
+            </div>
+            <div class="footer-section">
+                <h3 data-translate="follow-us">Síguenos</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/iebnuevavida" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/iebnuevavida" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/iebuevavida" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 <span data-translate="church-name">Iglesia Nueva Vida</span>. <span data-translate="all-rights">Todos los derechos reservados</span>.</p>
+        </div>
+    </footer>
+    <a href="https://wa.me/59897988609" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-            // Carregar componentes
-            await loadComponent('components/header.html', 'header-container');
-            await loadComponent('components/footer.html', 'footer-container');
-            await loadComponent('components/home-content.html', 'content-container');
-            
-            // Inicializar estado ativo dos links
-            if (typeof updateActiveLinks === 'function') {
-                updateActiveLinks();
-            }
-
-            // Inicializar o seletor de idioma
-            const languageButton = document.querySelector('.language-button');
-            const languageDropdown = document.querySelector('.language-dropdown');
-            const languageOptions = document.querySelectorAll('.language-option');
-            const currentLanguageSpan = document.querySelector('.current-language');
-            
-            // Carregar idioma salvo ou usar o padrão (espanhol)
-            const savedLanguage = localStorage.getItem('language') || 'es';
-            if (typeof updateLanguage === 'function') {
-                updateLanguage(savedLanguage);
-            }
-            
-            // Toggle do dropdown de idioma
-            if (languageButton && languageDropdown) {
-                languageButton.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    languageDropdown.classList.toggle('active');
-                });
-                
-                // Fechar dropdown ao clicar fora
-                document.addEventListener('click', function() {
-                    languageDropdown.classList.remove('active');
-                });
-                
-                // Prevenir que o clique no dropdown feche o dropdown
-                languageDropdown.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                });
-            }
-            
-            // Seleção de idioma
-            languageOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    const flag = this.getAttribute('data-flag');
-                    
-                    if (typeof updateLanguage === 'function') {
-                        updateLanguage(lang, flag);
-                    }
-                    languageDropdown.classList.remove('active');
-                });
-            });
-
-            // Atualizar o idioma da página após carregar todo o conteúdo
-            if (typeof updatePageLanguage === 'function') {
-                updatePageLanguage();
-            }
-        });
-    </script>
+    <script src="js/translation.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html> 

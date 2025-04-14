@@ -4,94 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-translate="events">Eventos</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <nav class="main-nav">
-        <div class="nav-left">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="images/logo.jpeg" alt="Igreja Nova Vida" data-translate="church-name">
-                </a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="activities.html" data-translate="activities">Actividades</a></li>
-                <li class="dropdown">
-                    <a href="events.html" data-translate="events">Eventos</a>
-                    <ul class="dropdown-content">
-                        <li><a href="events.html" data-translate="youth-meeting">Jóvenes</a></li>
-                        <li><a href="events.html" data-translate="men">Hombres</a></li>
-                        <li><a href="events.html" data-translate="women">Mujeres</a></li>
-                        <li><a href="events.html" data-translate="general">General</a></li>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html"><img src="images/logo.jpeg" alt="Igreja Nueva Vida Logo"></a>
+                </div>
+                <div class="mobile-menu-button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <nav class="main-navigation">
+                    <ul class="nav-links">
+                        <li><a href="index.html" data-translate="home">Início</a></li>
+                        <li><a href="activities.html" data-translate="activities">Actividades</a></li>
+                        <li><a href="events.html" data-translate="events">Eventos</a></li>
+                        <li><a href="meetings.html" data-translate="meetings">Reuniones</a></li>
                     </ul>
-                </li>
-                <li><a href="meetings.html" data-translate="meetings">Reuniones</a></li>
-            </ul>
-        </div>
-        <div class="language-selector">
-            <button class="language-button">
-                <i class="fas fa-globe"></i>
-                <span class="current-language">🇺🇾</span>
-            </button>
-            <div class="language-dropdown">
-                <div class="language-option" data-lang="es" data-flag="🇺🇾">
-                    <span class="flag">🇺🇾</span>
-                    <span class="language-name">Español</span>
-                </div>
-                <div class="language-option" data-lang="pt" data-flag="🇧🇷">
-                    <span class="flag">🇧🇷</span>
-                    <span class="language-name">Português</span>
-                </div>
-                <div class="language-option" data-lang="en" data-flag="🇺🇸">
-                    <span class="flag">🇺🇸</span>
-                    <span class="language-name">English</span>
+                </nav>
+                <div class="language-selector">
+                    <button class="language-button">
+                        <i class="fas fa-globe"></i>
+                        <span class="current-language">🇺🇾</span>
+                    </button>
+                    <div class="language-dropdown">
+                        <div class="language-option" data-lang="en" data-flag="🇺🇸">
+                            <span class="flag">🇺🇸</span>
+                            <span class="language-name">English</span>
+                        </div>
+                        <div class="language-option" data-lang="es" data-flag="🇺🇾">
+                            <span class="flag">🇺🇾</span>
+                            <span class="language-name">Español</span>
+                        </div>
+                        <div class="language-option" data-lang="pt" data-flag="🇧🇷">
+                            <span class="flag">🇧🇷</span>
+                            <span class="language-name">Português</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </nav>
+    </header>
+    
+    <main class="content-container">
+        <section class="page-header">
+            <div class="container">
+                <h1 data-translate="events">Eventos</h1>
+                <p data-translate="events-description">Conheça os próximos eventos da nossa igreja</p>
+            </div>
+        </section>
 
-    <section class="content-section">
-        <h2 data-translate="upcoming-events">Próximos Eventos</h2>
-        <div class="events-grid">
-            <div class="event-card">
-                <div class="event-icon">
-                    <i class="fas fa-users"></i>
+        <section class="events-section">
+            <div class="container">
+                <h2 data-translate="upcoming-events">Próximos Eventos</h2>
+                <div class="events-grid">
+                    <div class="event-card">
+                        <div class="card-icon"><i class="fas fa-users"></i></div>
+                        <h3 data-translate="youth-meeting">Jóvenes</h3>
+                        <p data-translate="youth-event-description">Únase a nosotros para una emocionante reunión de jóvenes con juegos, adoración y un poderoso mensaje.</p>
+                        <p class="event-date">
+                            <i class="far fa-calendar"></i>
+                            <span data-translate="every-friday">Todos los viernes</span> - 19:00
+                        </p>
+                        <a href="#" class="btn" data-translate="details">Detalles</a>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="card-icon"><i class="fas fa-male"></i></div>
+                        <h3 data-translate="men">Hombres</h3>
+                        <p data-translate="men-event-description">Un encuentro especial para que los hombres se conecten, crezcan espiritualmente y se apoyen mutuamente.</p>
+                        <p class="event-date">
+                            <i class="far fa-calendar"></i>
+                            <span data-translate="first-saturday">Primer sábado</span> - 15:00
+                        </p>
+                        <a href="#" class="btn" data-translate="details">Detalles</a>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="card-icon"><i class="fas fa-female"></i></div>
+                        <h3 data-translate="women">Mujeres</h3>
+                        <p data-translate="women-event-description">Un momento para que las mujeres se reúnan, compartan experiencias y crezcan en la fe.</p>
+                        <p class="event-date">
+                            <i class="far fa-calendar"></i>
+                            <span data-translate="second-saturday">Segundo sábado</span> - 15:00
+                        </p>
+                        <a href="#" class="btn" data-translate="details">Detalles</a>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="card-icon"><i class="fas fa-church"></i></div>
+                        <h3 data-translate="general">General</h3>
+                        <p data-translate="general-event-description">Únase a toda nuestra comunidad de la iglesia para celebraciones y reuniones especiales.</p>
+                        <p class="event-date">
+                            <i class="far fa-calendar"></i>
+                            <span data-translate="last-sunday">Último domingo</span> - 11:30
+                        </p>
+                        <a href="#" class="btn" data-translate="details">Detalles</a>
+                    </div>
                 </div>
-                <h3 data-translate="youth-meeting">Jóvenes</h3>
-                <p data-translate="youth-event-description">Únete a nosotros para una emocionante reunión de jóvenes con juegos, adoración y un poderoso mensaje.</p>
-                <p class="event-date"><i class="far fa-calendar"></i> <span data-translate="every-friday">Todos los Viernes</span></p>
-                <a href="#" class="btn" data-translate="details">Detalles</a>
             </div>
-            <div class="event-card">
-                <div class="event-icon">
-                    <i class="fas fa-male"></i>
-                </div>
-                <h3 data-translate="men">Hombres</h3>
-                <p data-translate="men-event-description">Un encuentro especial para que los hombres se conecten, crezcan espiritualmente y se apoyen mutuamente.</p>
-                <p class="event-date"><i class="far fa-calendar"></i> <span data-translate="first-saturday">Primer Sábado</span></p>
-                <a href="#" class="btn" data-translate="details">Detalles</a>
-            </div>
-            <div class="event-card">
-                <div class="event-icon">
-                    <i class="fas fa-female"></i>
-                </div>
-                <h3 data-translate="women">Mujeres</h3>
-                <p data-translate="women-event-description">Un momento para que las mujeres se reúnan, compartan experiencias y crezcan en la fe.</p>
-                <p class="event-date"><i class="far fa-calendar"></i> <span data-translate="second-saturday">Segundo Sábado</span></p>
-                <a href="#" class="btn" data-translate="details">Detalles</a>
-            </div>
-            <div class="event-card">
-                <div class="event-icon">
-                    <i class="fas fa-church"></i>
-                </div>
-                <h3 data-translate="general">General</h3>
-                <p data-translate="general-event-description">Únete a toda nuestra comunidad de la iglesia para celebraciones y encuentros especiales.</p>
-                <p class="event-date"><i class="far fa-calendar"></i> <span data-translate="last-sunday">Último Domingo</span></p>
-                <a href="#" class="btn" data-translate="details">Detalles</a>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
         <div class="footer-content">
@@ -101,27 +120,28 @@
             </div>
             <div class="footer-section">
                 <h3 data-translate="contact">Contacto</h3>
-                <p><i class="fas fa-map-marker-alt"></i> <span data-translate="address">Calle de la Iglesia, 123, Ciudad</span></p>
-                <p><i class="fas fa-phone"></i> <span data-translate="phone">+598 99 123 456</span></p>
-                <p><i class="fas fa-envelope"></i> <span data-translate="email">contacto@iglesianuevaida.com</span></p>
+                <p><a href="https://maps.app.goo.gl/EaC6JZ3v5mSWENKY9" target="_blank"><i class="fas fa-map-marker-alt"></i> <span data-translate="address">Francisco Joaquín Muñoz 3376, 11300 Montevideo</span></a></p>
+                <p><a href="tel:26227763"><i class="fas fa-phone"></i> <span data-translate="phone">26227763</span></a></p>
+                <p><a href="mailto:iebnuevid@gmail.com"><i class="fas fa-envelope"></i> <span data-translate="email">iebnuevid@gmail.com</span></a></p>
             </div>
             <div class="footer-section">
                 <h3 data-translate="follow-us">Síguenos</h3>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.facebook.com/iebnuevavida" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/iebnuevavida" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/iebuevavida" target="_blank"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2023 <span data-translate="church-name">Iglesia Nueva Vida</span>. <span data-translate="all-rights">Todos los derechos reservados</span>.</p>
+            <p>&copy; 2025 <span data-translate="church-name">Iglesia Nueva Vida</span>. <span data-translate="all-rights">Todos los derechos reservados</span>.</p>
         </div>
     </footer>
-    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/59897988609" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <script src="script.js"></script>
+    <script src="js/translation.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html> 

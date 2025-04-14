@@ -4,40 +4,158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-translate="meetings">Reuniones</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <div id="header-container"></div>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html"><img src="images/logo.jpeg" alt="Igreja Nueva Vida Logo"></a>
+                </div>
+                <div class="mobile-menu-button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <nav class="main-navigation">
+                    <ul class="nav-links">
+                        <li><a href="index.html" data-translate="home">Início</a></li>
+                        <li><a href="activities.html" data-translate="activities">Actividades</a></li>
+                        <li><a href="events.html" data-translate="events">Eventos</a></li>
+                        <li><a href="meetings.html" data-translate="meetings">Reuniones</a></li>
+                    </ul>
+                </nav>
+                <div class="language-selector">
+                    <button class="language-button">
+                        <i class="fas fa-globe"></i>
+                        <span class="current-language">🇺🇾</span>
+                    </button>
+                    <div class="language-dropdown">
+                        <div class="language-option" data-lang="en" data-flag="🇺🇸">
+                            <span class="flag">🇺🇸</span>
+                            <span class="language-name">English</span>
+                        </div>
+                        <div class="language-option" data-lang="es" data-flag="🇺🇾">
+                            <span class="flag">🇺🇾</span>
+                            <span class="language-name">Español</span>
+                        </div>
+                        <div class="language-option" data-lang="pt" data-flag="🇧🇷">
+                            <span class="flag">🇧🇷</span>
+                            <span class="language-name">Português</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
     
     <main class="content-container">
-        <div id="content-container"></div>
+        <section class="page-header">
+            <div class="container">
+                <h1 data-translate="meetings">Reuniones</h1>
+                <p data-translate="meetings-description">Bienvenido a nuestra página de reuniones. Aquí encontrarás el horario semanal de nuestras actividades.</p>
+            </div>
+        </section>
+
+        <section class="meetings-section">
+            <div class="container">
+                <div class="meetings-grid">
+                    <div class="day-section">
+                        <h2 data-translate="sunday">Domingo</h2>
+                        <div class="meeting-card">
+                            <h3 data-translate="sunday-school">Escuela Dominical</h3>
+                            <p class="time" data-translate="sunday-school-time">10:30 - 11:15</p>
+                            <p data-translate="sunday-school-description">Clases para niños, adultos y adolescentes</p>
+                        </div>
+                        <div class="meeting-card">
+                            <h3 data-translate="main-service">Culto Principal</h3>
+                            <p class="time" data-translate="main-service-time">11:30 - 13:00+</p>
+                        </div>
+                    </div>
+                    
+                    <div class="day-section">
+                        <h2 data-translate="monday">Lunes</h2>
+                        <div class="meeting-card">
+                            <p data-translate="no-meetings">No hay reuniones programadas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="day-section">
+                        <h2 data-translate="tuesday">Martes</h2>
+                        <div class="meeting-card">
+                            <h3 data-translate="prayer-study">Reunión de Oración y Estudio Bíblico</h3>
+                            <p class="time" data-translate="prayer-study-time">18:00 - 19:30</p>
+                        </div>
+                    </div>
+                    
+                    <div class="day-section">
+                        <h2 data-translate="wednesday">Miércoles</h2>
+                        <div class="meeting-card">
+                            <p data-translate="no-meetings">No hay reuniones programadas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="day-section">
+                        <h2 data-translate="thursday">Jueves</h2>
+                        <div class="meeting-card">
+                            <h3 data-translate="bible-study">Estudio Bíblico Presencial</h3>
+                            <p class="time" data-translate="bible-study-time">15:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="day-section">
+                        <h2 data-translate="friday">Viernes</h2>
+                        <div class="meeting-card">
+                            <h3 data-translate="online-bible-study">Estudio Bíblico Online</h3>
+                            <p class="time" data-translate="online-bible-study-time">19:30</p>
+                        </div>
+                    </div>
+                    
+                    <div class="day-section">
+                        <h2 data-translate="saturday">Sábado</h2>
+                        <div class="meeting-card">
+                            <h3 data-translate="youth-meeting">Jóvenes</h3>
+                            <p class="time">18:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
-    
-    <div id="footer-container"></div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            async function loadComponent(url, containerId) {
-                try {
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    const data = await response.text();
-                    document.getElementById(containerId).innerHTML = data;
-                } catch (error) {
-                    console.error(`Erro ao carregar ${url}:`, error);
-                    document.getElementById(containerId).innerHTML = `<div class="error-message">Erro ao carregar o componente. Por favor, tente novamente.</div>`;
-                }
-            }
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-translate="about-us">Sobre Nosotros</h3>
+                <p data-translate="about-description">Somos una comunidad acogedora dedicada a difundir el amor y el mensaje de Dios.</p>
+            </div>
+            <div class="footer-section">
+                <h3 data-translate="contact">Contacto</h3>
+                <p><a href="https://maps.app.goo.gl/EaC6JZ3v5mSWENKY9" target="_blank"><i class="fas fa-map-marker-alt"></i> <span data-translate="address">Francisco Joaquín Muñoz 3376, 11300 Montevideo</span></a></p>
+                <p><a href="tel:26227763"><i class="fas fa-phone"></i> <span data-translate="phone">26227763</span></a></p>
+                <p><a href="mailto:iebnuevid@gmail.com"><i class="fas fa-envelope"></i> <span data-translate="email">iebnuevid@gmail.com</span></a></p>
+            </div>
+            <div class="footer-section">
+                <h3 data-translate="follow-us">Síguenos</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/iebnuevavida" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/iebnuevavida" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/iebuevavida" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 <span data-translate="church-name">Iglesia Nueva Vida</span>. <span data-translate="all-rights">Todos los derechos reservados</span>.</p>
+        </div>
+    </footer>
+    <a href="https://wa.me/59897988609" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-            // Carregar componentes
-            loadComponent('components/header.html', 'header-container');
-            loadComponent('components/meetings-content.html', 'content-container');
-            loadComponent('components/footer.html', 'footer-container');
-        });
-    </script>
-    <script src="script.js"></script>
+    <script src="js/translation.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html> 
