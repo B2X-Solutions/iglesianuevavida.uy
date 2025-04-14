@@ -167,7 +167,7 @@ function changeLanguage(lang) {
 
 // Função para lidar com o efeito de scroll do header
 function initHeaderScrollEffect() {
-    const header = document.querySelector('.header');
+    const header = document.querySelector('header');
     let lastScrollTop = 0;
     let scrollThreshold = 100;
 
