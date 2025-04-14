@@ -275,133 +275,129 @@ const translations = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar o seletor de idioma
-    initLanguageSelector();
+// Função para carregar conteúdo da página
+function loadPageContent(url) {
+    const contentContainer = document.getElementById('content-container');
+    if (!contentContainer) return;
+
+    // Remover a parte do domínio e query params da URL
+    const cleanUrl = url.replace(/^.*\/\/[^\/]+/, '').split('?')[0];
     
-    // Menu mobile toggle
-    const mobileMenuButton = document.querySelector('.mobile-menu-button');
-    const mobileNavLinks = document.querySelector('.nav-links');
+    // Atualizar o idioma após carregar o conteúdo
+    updatePageLanguage();
     
-    if (mobileMenuButton && mobileNavLinks) {
-        mobileMenuButton.addEventListener('click', function() {
-            mobileNavLinks.classList.toggle('active');
-            mobileMenuButton.classList.toggle('active');
-            
-            // Alternar ícone
-            const icon = mobileMenuButton.querySelector('i');
-            if (icon) {
-                icon.classList.toggle('fa-bars');
-                icon.classList.toggle('fa-times');
-            }
-        });
+    // Atualizar links ativos
+    updateActiveLinks(cleanUrl);
+}
+
+// Função para atualizar links ativos
+function updateActiveLinks(currentPath) {
+    const navigationLinks = document.querySelectorAll('.nav-links a');
+    
+    navigationLinks.forEach(link => {
+        const href = link.getAttribute('href');
         
-        // Fechar menu ao clicar fora
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.nav-links') && !e.target.closest('.mobile-menu-button')) {
-                mobileNavLinks.classList.remove('active');
-                mobileMenuButton.classList.remove('active');
-                
-                // Restaurar ícone
-                const icon = mobileMenuButton.querySelector('i');
-                if (icon) {
-                    icon.classList.add('fa-bars');
-                    icon.classList.remove('fa-times');
-                }
-            }
-        });
-    }
-    
-    // Gerenciar dropdowns no mobile
-    const dropdowns = document.querySelectorAll('.dropdown');
-    
-    dropdowns.forEach(dropdown => {
-        const dropdownLink = dropdown.querySelector('a');
+        // Remover classe active de todos os links
+        link.classList.remove('active');
         
-        dropdownLink.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                
-                // Fechar todos os outros dropdowns
-                dropdowns.forEach(d => {
-                    if (d !== dropdown) {
-                        d.classList.remove('active');
-                    }
-                });
-                
-                // Alternar o dropdown atual
-                dropdown.classList.toggle('active');
-            }
-        });
-    });
-    
-    // Fechar dropdowns ao clicar fora
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.nav-links') && !e.target.closest('.mobile-menu-button')) {
-            dropdowns.forEach(d => d.classList.remove('active'));
+        // Adicionar classe active se o link corresponder à página atual
+        if (currentPath === href || 
+            (currentPath.includes('/events/') && href === '../events.html') ||
+            (currentPath === '/' && href === 'index.html')) {
+            link.classList.add('active');
         }
     });
-    
-    // Navegação entre páginas
+}
+
+// Função para inicializar navegação
+function initNavigation() {
     const navigationLinks = document.querySelectorAll('.nav-links a');
     
     navigationLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            // Não interceptar cliques em links de dropdown no mobile
-            if (window.innerWidth <= 768 && this.closest('.dropdown-content')) {
-                return;
-            }
+            const href = this.getAttribute('href');
             
-            // Não interceptar cliques em links de dropdown no desktop
-            if (window.innerWidth > 768 && this.closest('.dropdown-content')) {
-                return;
-            }
-            
-            // Não interceptar cliques em links externos
-            if (this.getAttribute('href').startsWith('http')) {
+            // Permitir navegação normal para links externos ou de dropdown
+            if (href.startsWith('http') || 
+                (window.innerWidth <= 768 && this.closest('.dropdown-content')) ||
+                (window.innerWidth > 768 && this.closest('.dropdown-content'))) {
                 return;
             }
             
             e.preventDefault();
             
-            const href = this.getAttribute('href');
-            
-            // Atualizar URL sem recarregar a página
+            // Atualizar URL e histórico
             history.pushState({}, '', href);
             
-            // Carregar conteúdo da página
+            // Carregar conteúdo
             loadPageContent(href);
             
-            // Atualizar estado ativo dos links
-            updateActiveLinks();
-            
-            // Fechar menu móvel após navegação
-            if (mobileNavLinks) {
-                mobileNavLinks.classList.remove('active');
+            // Fechar menu móvel
+            const mobileNav = document.querySelector('.nav-links');
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            if (mobileNav && mobileMenuButton) {
+                mobileNav.classList.remove('active');
                 mobileMenuButton.classList.remove('active');
-                
-                // Restaurar ícone
-                const icon = mobileMenuButton.querySelector('i');
-                if (icon) {
-                    icon.classList.add('fa-bars');
-                    icon.classList.remove('fa-times');
-                }
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
             }
         });
     });
     
-    // Lidar com navegação do histórico do navegador
-    window.addEventListener('popstate', function() {
+    // Lidar com navegação do histórico
+    window.addEventListener('popstate', () => {
         loadPageContent(window.location.pathname);
-        updateActiveLinks();
     });
-    
-    // Inicializar estado ativo dos links
-    updateActiveLinks();
+}
 
+// Função para inicializar menu móvel
+function initMobileMenu() {
+    const mobileMenuButton = document.querySelector('.mobile-menu-button');
+    const navLinks = document.querySelector('.nav-links');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    if (mobileMenuButton && navLinks) {
+        // Toggle do menu móvel
+        mobileMenuButton.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('active');
+            mobileMenuButton.classList.toggle('active');
+            mobileMenuButton.setAttribute('aria-expanded', isOpen);
+        });
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-links') && !e.target.closest('.mobile-menu-button')) {
+                navLinks.classList.remove('active');
+                mobileMenuButton.classList.remove('active');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+                dropdowns.forEach(d => d.classList.remove('active'));
+            }
+        });
+
+        // Gerenciar dropdowns no mobile
+        dropdowns.forEach(dropdown => {
+            const dropdownLink = dropdown.querySelector('a');
+            
+            dropdownLink.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    dropdowns.forEach(d => {
+                        if (d !== dropdown) d.classList.remove('active');
+                    });
+                    dropdown.classList.toggle('active');
+                }
+            });
+        });
+    }
+}
+
+// Inicialização quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', function() {
+    initLanguageSelector();
+    initMobileMenu();
+    initNavigation();
+    
     // Carregar conteúdo inicial
     loadPageContent(window.location.pathname);
-    updateActiveLinks();
 });
 
 // Função para inicializar o seletor de idioma
