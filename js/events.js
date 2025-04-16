@@ -32,9 +32,17 @@ document.addEventListener('DOMContentLoaded', function() {
             location: 'Salón de conferencias',
             details: 'Nuestro grupo de mujeres ofrece un espacio seguro para compartir, orar y crecer juntas. Cada reunión incluye un tema específico, tiempo de adoración y actividades prácticas.',
             images: [
-                'images/women-event-1.jpg',
-                'images/women-event-2.jpg',
-                'images/women-event-3.jpg'
+                "images/women/Mujeres-1.jpg",
+                "images/women/Mujeres-2.jpg",
+                "images/women/Mujeres-3.jpg",
+                "images/women/Mujeres-4.jpg",
+                "images/women/Mujeres-5.jpg",
+                "images/women/Mujeres-6.jpg",
+                "images/women/Mujeres-7.jpg",
+                "images/women/Mujeres-8.jpg",
+                "images/women/Mujeres-9.jpg",
+                "images/women/Mujeres-10.jpg",
+                "images/women/Mujeres-11.jpg"
             ]
         },
         'general': {
