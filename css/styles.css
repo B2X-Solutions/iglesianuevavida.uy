@@ -1011,3 +1011,24 @@ header {
   padding-top: 0; /* Remove o padding-top */
   margin-top: 0; /* Remove o margin-top negativo */
 } 
+
+/* ...existing code... */
+
+@media (max-width: 480px) {
+  /* Ajuste para la visualización del calendario en móviles */
+  .calendar-container {
+    height: auto;
+    position: relative;
+    padding-bottom: 100%; /* Proporción aspecto para que sea más alto */
+    overflow: hidden;
+  }
+  
+  .calendar-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+}
